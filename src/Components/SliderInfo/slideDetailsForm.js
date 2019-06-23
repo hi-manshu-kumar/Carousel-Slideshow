@@ -7,11 +7,6 @@ class DetailForm extends Component{
         this.state={
             loading: false,
             details: []
-            // details: [
-            //     {images:"https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg", title: 'ss'},
-            //     {images:"https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/canyon.jpg", title: ''},
-            //     {images:"https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/city.jpg", title: ''},
-            // ],
         }
     }
 

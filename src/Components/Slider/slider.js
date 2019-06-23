@@ -9,24 +9,9 @@ export default class Slider extends Component{
     constructor(props){
         super(props);
         this.state={
-            // images: [
-            //     "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg",
-            //     "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/canyon.jpg",
-            //     "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/city.jpg",
-            //     "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/desert.jpg",
-            //     "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/mountains.jpg",
-            //     "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/redsky.jpg",
-            //     "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/sandy-shores.jpg",
-            //     "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/tree-of-life.jpg"
-            // ],
-            details: [
-                {images: "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg", title: "Default 1"},
-                {images: "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/canyon.jpg", title: "Default 2"},
-                {images: "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/city.jpg", title: "Default 3"}
-            ],
+            details: [],
             currentIndex: 0,
             translateValue: 0,
-            sliderLength: 3
         }
     }
     
@@ -35,12 +20,8 @@ export default class Slider extends Component{
             props.history.push({pathname: '/'})
             return null
         }
-        console.log(state.details[0].images!==props.location.data[0].images)
-        if(state.details[0].images!==props.location.data[0].images || state.details[0].title!==props.location.data[0].title){
-            return {details:props.location.data};
-        } else{
-            return null;
-        }
+        return {details:props.location.data};
+
     }
 
     goToPrevSlide = () => {
@@ -83,17 +64,13 @@ export default class Slider extends Component{
             translateValue
         } = this.state
       
-        // Do nothing if someone clicks on the currently active dot
         if(i === currentIndex) 
         return
       
-        // If the number taken from the i argument passed into handleDotClick is
-        // less than the currently active dot, we obviously need to move backwards to a previous slide.
         if(i > currentIndex) {
             this.setState({translateValue: (-i * this.slideWidth())})
         }   
 
-        // We need to go forward to a particular slide
         else {
             this.setState({translateValue: translateValue + (currentIndex - i) * this.slideWidth()})
         }

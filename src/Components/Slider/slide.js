@@ -3,10 +3,11 @@ import React from 'react';
 
 const Slide = ({image, title}) => {
     const styles = {
-        backgroundImage: `url(${image})`,
+        backgroundImage: `linear-gradient( rgba(0,0,0, 0), rgba(0,0,0, 0.8)),url(${image})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: '50% 60%',
+        opacity: '1.5'
     }
 
     return (   
