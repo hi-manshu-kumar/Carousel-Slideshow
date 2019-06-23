@@ -20,9 +20,9 @@ export default class Slider extends Component{
             //     "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/tree-of-life.jpg"
             // ],
             details: [
-                {images: "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg", title: "hi there1"},
-                {images: "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/canyon.jpg", title: "hi there2"},
-                {images: "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/city.jpg", title: "hi there3"}
+                {images: "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg", title: "Default 1"},
+                {images: "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/canyon.jpg", title: "Default 2"},
+                {images: "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/city.jpg", title: "Default 3"}
             ],
             currentIndex: 0,
             translateValue: 0,
@@ -30,13 +30,21 @@ export default class Slider extends Component{
         }
     }
     
-    // sliderLength = () => {
-    //     const {details} = this.state;
-    //     details
-    // }
+    static getDerivedStateFromProps(props, state){
+        if(props.location.data === undefined){
+            props.history.push({pathname: '/'})
+            return null
+        }
+        console.log(state.details[0].images!==props.location.data[0].images)
+        if(state.details[0].images!==props.location.data[0].images || state.details[0].title!==props.location.data[0].title){
+            return {details:props.location.data};
+        } else{
+            return null;
+        }
+    }
 
     goToPrevSlide = () => {
-        let length  = this.state.images.length - 1
+        let length  = this.state.details.length - 1
         if(this.state.currentIndex === 0){
             return this.setState({
                 currentIndex: length,
@@ -52,7 +60,7 @@ export default class Slider extends Component{
 
     goToNextSlide = () => {
 
-        if(this.state.currentIndex === this.state.images.length - 1) {
+        if(this.state.currentIndex === this.state.details.length - 1) {
             return this.setState({
               currentIndex: 0,
               translateValue: 0
@@ -95,7 +103,7 @@ export default class Slider extends Component{
 
     render() {
         return (
-            <div className="slider">
+            <div className="slider display--container">
 
                 <div className="slider-wrapper"
                         style={{
@@ -113,8 +121,14 @@ export default class Slider extends Component{
                     images={this.state.details}
                     dotClick={this.handleDotClick}
                 />
-                <LeftArrow goToPrev = {this.goToPrevSlide}/>
-                <RightArrow goToNext = {this.goToNextSlide}/>
+                {
+                    this.state.details.length>1 ? 
+                        <>
+                            <LeftArrow goToPrev = {this.goToPrevSlide}/>
+                            <RightArrow goToNext = {this.goToNextSlide}/>
+                        </>
+                    : null
+                }
             </div>  
         )
     }
