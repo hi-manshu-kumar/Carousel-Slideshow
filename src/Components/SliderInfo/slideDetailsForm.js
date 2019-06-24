@@ -5,14 +5,14 @@ class DetailForm extends Component{
     constructor(props){
         super(props);
         this.state={
-            loading: false,
+            loading: true,
             details: []
         }
     }
 
     componentDidMount(){
         if(this.props.location.data===undefined){
-            this.props.history.push({pathname: '/'})
+            this.props.history.push('/')
         }
         this.fetchImage();
     }

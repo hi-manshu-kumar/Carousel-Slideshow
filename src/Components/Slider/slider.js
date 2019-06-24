@@ -17,7 +17,7 @@ export default class Slider extends Component{
     
     static getDerivedStateFromProps(props, state){
         if(props.location.data === undefined){
-            props.history.push({pathname: '/'})
+            props.history.push('/')
             return null
         }
         return {details:props.location.data};
